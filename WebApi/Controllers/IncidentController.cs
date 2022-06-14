@@ -2,7 +2,6 @@
 using WebApi.Models;
 using WebApi.Models.ViewModels;
 using WebApi.Services;
-using ClassMapper;
 
 namespace WebApi.Controllers;
 
@@ -26,10 +25,7 @@ public class IncidentController : ControllerBase {
     }
 
     [HttpGet]
-    public async Task<IReadOnlyCollection<IncidentViewModel>> GetAll() {
-        var incidents = await _incidentService.GetAllAsync();
-        return incidents.Select(incident => incident.Map<Incident, IncidentViewModel>()).ToList();
-    }
+    public async Task<IReadOnlyCollection<Incident>> GetAll() => await _incidentService.GetAllAsync();
 
     [HttpPost]
     public async Task<ActionResult> Post([FromBody] IncidentViewModel viewModel) {
